@@ -1,4 +1,4 @@
-sudo: required
+# sudo: required
 before_install: gem update --system
 dist: trusty
 language: ruby
@@ -7,6 +7,6 @@ services:
 before_script:
   - cp config/database.travis.yml config/database.yml
   - gem install --no-document pronto pronto-rubocop pronto-flay
-script:
   - RAILS_ENV=test bundle exec rake db:create db:migrate
+script:
   - PRONTO_GITHUB_ACCESS_TOKEN=${GITHUB_ACCESS_TOKEN} PRONTO_PULL_REQUEST_ID=${TRAVIS_PULL_REQUEST} pronto run -f github_status github_pr -c origin/${TRAVIS_BRANCH}
